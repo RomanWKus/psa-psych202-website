@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSYCH 202 PSA: AI & Learning</title>
+    
+    <!-- 1. Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 3. AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- 4. Fonts: Libre Baskerville (Headings) + Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Libre Baskerville', 'serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            600: '#57534e',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        paper: '#fdfdfc', // Cleaner off-white
+                        academic: {
+                            blue: '#2563eb', // Royal Blue
+                            sage: '#059669', // Emerald
+                            rose: '#e11d48', // Rose/Red
+                            green: '#15803d', // Darker Green for text readability
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #d6d3d1;
+            border-radius: 99px;
+            border: 2px solid #fdfdfc; 
+        }
+        
+        /* Global Scroll Settings */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #d6d3d1 transparent;
+            scroll-padding-top: 6rem; /* Fallback for no-js */
+        }
+
+        /* Base styles */
+        body {
+            background-color: #fdfdfc;
+            color: #1c1917;
+        }
+        
+        /* Checklist Animations */
+        .checklist-item {
+            transition: all 0.2s ease-out;
+        }
+        /* Fix: Added !important to force override of hover states */
+        .checklist-item.completed {
+            background-color: #f0fdf4 !important;
+            border-color: #86efac !important;
+        }
+        .checklist-item.completed .check-text {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        
+        /* Timeline Line in Science Section */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 2.5rem;
+            left: 3rem;
+            right: 3rem;
+            height: 1px;
+            background: #e5e7eb;
+            z-index: 0;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                display: block;
+            }
+        }
+
+        /* Nav backdrop transition */
+        .nav-scrolled {
+            background-color: rgba(253, 253, 252, 0.98);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e7e5e4;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-stone-200 selection:text-stone-900">
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-4 bg-paper/90 backdrop-blur-sm border-b border-transparent">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center relative">
+            <a href="#top" class="font-serif font-bold text-lg text-stone-900 tracking-tight hover:text-academic-blue transition-colors z-50">
+                PSYCH 202 <span class="text-stone-300 font-sans font-light mx-2">|</span> PSA
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+                <a href="#science" class="hover:text-academic-blue transition-colors">How Learning Works</a>
+                <a href="#misuse" class="hover:text-academic-blue transition-colors">The Dangers</a>
+                <a href="#strategies" class="hover:text-academic-blue transition-colors">Strategies</a>
+                <a href="#better-ai" class="hover:text-academic-blue transition-colors">Better AI</a>
+                <a href="#checklist" class="px-6 py-2.5 bg-stone-900 text-stone-50 rounded-md text-sm font-medium hover:bg-stone-700 transition-colors shadow-sm whitespace-nowrap">Checklist</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-stone-800 text-xl p-2 focus:outline-none z-50">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 absolute w-full left-0 top-full shadow-lg z-40">
+            <div class="flex flex-col p-6 space-y-4 text-stone-700 font-medium">
+                <a href="#science" class="mobile-link block hover:text-academic-blue">How Learning Works</a>
+                <a href="#misuse" class="mobile-link block hover:text-academic-blue">The Dangers</a>
+                <a href="#strategies" class="mobile-link block hover:text-academic-blue">Strategies</a>
+                <a href="#better-ai" class="mobile-link block hover:text-academic-blue">Better AI</a>
+                <a href="#checklist" class="mobile-link block text-academic-blue font-bold">Checklist</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="top" class="pt-24 pb-12 md:pt-32 md:pb-20 px-6 bg-paper min-h-[85vh] flex flex-col justify-center">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-start lg:items-center">
+            
+            <!-- Left: Text Content -->
+            <div class="text-left order-2 lg:order-1" data-aos="fade-up" data-aos-duration="700">
+                <div class="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-widest uppercase border rounded-full border-stone-200 text-stone-500 bg-white shadow-sm">
+                    For Students (HS & College)
+                </div>
+                
+                <!-- Unified Title Block -->
+                <h1 class="font-serif text-[#1A1A1A] mb-6 tracking-tight text-4xl lg:text-5xl font-bold leading-tight">
+                    How to Use AI to Study Without Destroying Your Learning
+                </h1>
+                
+                <!-- Shortened Human Intro -->
+                <p class="font-sans text-lg text-stone-800 leading-relaxed mb-6 max-w-md">
+                    AI is useful, but it can’t do the learning for you. When used deliberately, it becomes a tool for reflection and clearer thinking.
+                </p>
+
+                <!-- Research Quote -->
+                <div class="mb-8 pl-4 border-l-2 border-stone-300">
+                    <p class="text-stone-600 italic font-serif text-base leading-relaxed">
+                        “Learning is a consequence of thinking.”
+                    </p>
+                    <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider font-semibold">– Daniel Willingham</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#science" class="inline-flex justify-center items-center gap-2 bg-stone-900 text-white px-6 py-3 rounded font-medium hover:bg-stone-700 transition-all shadow-sm text-sm">
+                        How the Brain Learns
+                        <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                    <a href="#checklist" class="inline-flex justify-center items-center gap-2 bg-white text-stone-800 border border-stone-300 px-6 py-3 rounded font-medium hover:bg-stone-50 transition-all shadow-sm text-sm">
+                        Jump to Checklist
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Improved 'On This Page' Card -->
+            <div class="hidden lg:flex flex-col justify-center items-start relative order-1 lg:order-2 pl-12" data-aos="fade-left" data-aos-duration="800">
+                
+                <!-- Mini TOC (Larger Font, Better Spacing) -->
+                <div class="w-full max-w-sm border border-stone-200 rounded-lg p-10 bg-white shadow-sm">
+                    <span class="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-6 border-b border-stone-100 pb-3">On this page</span>
+                    <ul class="space-y-5">
+                        <li class="flex items-center gap-3 text-stone-700 text-lg hover:text-academic-blue transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-academic-blue"></div>
+                            <a href="#science">Biological Learning Stages</a>
+                        </li>
+                        <li class="flex items-center gap-3 text-stone-700 text-lg hover:text-academic-blue transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-academic-rose"></div>
+                            <a href="#misuse">Common AI Pitfalls</a>
+                        </li>
+                        <li class="flex items-center gap-3 text-stone-700 text-lg hover:text-academic-blue transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-academic-sage"></div>
+                            <a href="#strategies">Research-Backed Strategies</a>
+                        </li>
+                        <li class="flex items-center gap-3 text-stone-700 text-lg hover:text-academic-blue transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
+                            <a href="#better-ai">Practical Usage Guide</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: THE SCIENCE -->
+    <section id="science" class="py-20 bg-white border-y border-stone-100 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="max-w-2xl mb-16 mx-auto md:mx-0" data-aos="fade-up" data-aos-duration="600">
+                <span class="text-academic-blue font-bold uppercase tracking-widest text-xs block mb-2">The Psychology</span>
+                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4">How Your Brain Actually Learns</h2>
+                <p class="text-stone-800 text-lg leading-relaxed">Learning requires a biological process involving three distinct stages. Skipping one means the memory fails to stick.</p>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative timeline-line grid md:grid-cols-3 gap-8 lg:gap-12">
+                
+                <!-- Card 1: White Background -->
+                <div class="relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
+                    <div>
+                        <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 01</span>
+                        <div class="w-10 h-10 rounded bg-blue-50 text-academic-blue flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-stone-900 mb-3">Encoding</h3>
+                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">Getting info in. This requires attention. If you skim an AI answer while distracted, the information is never processed.</p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="inline-block text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded border border-blue-100 w-full text-center">Deep Processing</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: White Background -->
+                <div class="relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+                    <div>
+                         <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 02</span>
+                        <div class="w-10 h-10 rounded bg-purple-50 text-purple-600 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-stone-900 mb-3">Storage</h3>
+                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">Maintaining info over time. To move things to long-term memory, you need to connect new info to what you already know.</p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="inline-block text-xs font-semibold text-purple-700 bg-purple-50 px-2 py-1 rounded border border-purple-100 w-full text-center">Consolidation</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: White Background -->
+                <div class="relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+                    <div>
+                         <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 03</span>
+                        <div class="w-10 h-10 rounded bg-emerald-50 text-academic-sage flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-stone-900 mb-3">Retrieval</h3>
+                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">Pulling info out. This is where learning is strengthened. Struggling to recall an answer reinforces the pathway.</p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="inline-block text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded border border-emerald-100 w-full text-center">Testing Effect</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE TRAP -->
+    <section id="misuse" class="py-20 bg-paper border-b border-stone-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="max-w-2xl mb-12 mx-auto md:mx-0" data-aos="fade-up" data-aos-duration="600">
+                <span class="text-academic-rose font-bold uppercase tracking-widest text-xs block mb-2">The Trap</span>
+                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4 pb-2 border-b-2 border-academic-rose inline-block">
+                    How Misusing AI Hurts Learning
+                </h2>
+                <p class="text-stone-800 text-lg mt-2 max-w-xl">Most students use AI in ways that feel productive but actually sabotage the biological learning process.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Danger Card 1 -->
+                <div class="bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" data-aos="fade-up" data-aos-duration="600">
+                    <div class="text-academic-rose text-xl mb-4"><i class="fa-solid fa-copy"></i></div>
+                    <h3 class="font-bold text-stone-900 text-lg mb-2">The Copy-Paste Trap</h3>
+                    <p class="text-stone-600 text-sm mb-6 leading-relaxed">When you copy an AI answer and submit it, you bypass Encoding entirely. Your brain treats it as noise.</p>
+                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">
+                        Result: Total Amnesia
+                    </div>
+                </div>
+
+                <!-- Danger Card 2 -->
+                <div class="bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+                    <div class="text-academic-rose text-xl mb-4"><i class="fa-solid fa-eye"></i></div>
+                    <h3 class="font-bold text-stone-900 text-lg mb-2">The "I Read It" Fallacy</h3>
+                    <p class="text-stone-600 text-sm mb-6 leading-relaxed">Reading a perfect AI explanation creates the Illusion of Competence. Recognition is not recall.</p>
+                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">
+                        Result: Exam Failure
+                    </div>
+                </div>
+
+                <!-- Danger Card 3 -->
+                <div class="bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+                    <div class="text-academic-rose text-xl mb-4"><i class="fa-solid fa-bolt"></i></div>
+                    <h3 class="font-bold text-stone-900 text-lg mb-2">The Cramming Enabler</h3>
+                    <p class="text-stone-600 text-sm mb-6 leading-relaxed">Summarizing weeks of work into one page creates shallow memories that fade within hours.</p>
+                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">
+                        Result: Poor Retention
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: STRATEGIES -->
+    <section id="strategies" class="py-20 bg-white border-y border-stone-100 relative">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div data-aos="fade-right" data-aos-duration="700">
+                    <span class="text-academic-blue font-bold uppercase tracking-widest text-xs block mb-2">The Solution</span>
+                    <h2 class="font-serif text-3xl font-bold text-stone-900 mb-6">What Research Says Actually Works</h2>
+                    <p class="text-stone-800 text-lg leading-relaxed mb-8">
+                        Decades of cognitive psychology research highlight a few high-leverage strategies. Integrating AI with these principles keeps the cognitive work on your side.
+                    </p>
+                    
+                    <div class="mb-8 pl-4 border-l-2 border-stone-300">
+                        <p class="text-stone-600 italic font-serif text-sm leading-relaxed">
+                            “Every time you retrieve a memory, you strengthen its neural representation.”
+                        </p>
+                        <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider font-semibold">– Henry L. Roediger III</p>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <!-- Strat 1: White Background -->
+                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-duration="600">
+                        <div class="text-academic-blue text-lg mb-3"><i class="fa-solid fa-brain"></i></div>
+                        <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Retrieval Practice</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">Testing yourself works better than re-reading. Active recall builds muscle memory for your brain.</p>
+                    </div>
+                    <!-- Strat 2: White Background -->
+                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-delay="50" data-aos-duration="600">
+                        <div class="text-academic-blue text-lg mb-3"><i class="fa-solid fa-layer-group"></i></div>
+                        <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Deep Processing</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">Don't just read words. Ask "Why?" and "How does this connect?" Elaboration builds memory.</p>
+                    </div>
+                    <!-- Strat 3: White Background -->
+                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+                        <div class="text-academic-blue text-lg mb-3"><i class="fa-regular fa-clock"></i></div>
+                        <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Spaced Repetition</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">Studying 30 mins over 4 days beats 2 hours once. Sleep consolidates memory. Give your brain breaks.</p>
+                    </div>
+                    <!-- Strat 4: White Background -->
+                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-delay="150" data-aos-duration="600">
+                        <div class="text-academic-blue text-lg mb-3"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Metacognition</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">Think about your thinking. Be honest: "Do I actually know this, or does it just look familiar?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: BETTER AI (Table Format) -->
+    <section id="better-ai" class="py-20 bg-paper border-b border-stone-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="600">
+                <span class="text-academic-blue font-bold uppercase tracking-widest text-xs block mb-2">Practical Guide</span>
+                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4">How to Use AI the Right Way</h2>
+                <p class="text-stone-800 text-lg">A comparison of common pitfalls versus strategies that align with learning science.</p>
+            </div>
+
+            <!-- Responsive Table Container -->
+            <div class="overflow-x-auto rounded-lg border border-stone-200 shadow-sm bg-white mx-auto max-w-6xl" data-aos="fade-up" data-aos-duration="600">
+                <table class="w-full text-left border-collapse hidden md:table table-fixed">
+                    <thead>
+                        <tr class="bg-stone-50 border-b border-stone-200">
+                            <!-- Fixed: Headers aligned top/left -->
+                            <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">How Students Often Use AI</th>
+                            <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">Psychological Problem</th>
+                            <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">Better Way to Use AI</th>
+                            <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">Related Principle</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <!-- Row 1 -->
+                        <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                Let AI write your essay while you skim it.
+                            </td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-rose-700">No encoding or deep processing.</span> You never engage with the ideas.
+                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-academic-green">Write your own draft first</span>, then ask AI to suggest improvements or counterarguments.
+                            </td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
+                                Deep processing, feedback, metacognition
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                Get full problem solutions without attempting them.
+                            </td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-rose-700">No retrieval practice.</span> You skip the struggle that builds memory.
+                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-academic-green">Try the problem first</span>, then ask AI to explain where your reasoning went wrong.
+                            </td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
+                                Retrieval practice, error correction
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                Read AI summaries once the night before the exam.
+                            </td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-rose-700">No spacing or testing.</span> You only get fleeting familiarity.
+                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-academic-green">Ask AI to create practice questions</span> you use over several days.
+                            </td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
+                                Spacing, testing effect
+                            </td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr class="hover:bg-stone-50 transition-colors">
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                Accept AI explanations without questioning them.
+                            </td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-rose-700">Passive consumption</span> creates an illusion of understanding.
+                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
+                                <span class="font-semibold text-academic-green">Ask AI to quiz you</span>, then explain concepts back in your own words.
+                            </td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
+                                Elaboration, metacognition
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Mobile Card View (shown only on small screens) -->
+                <div class="md:hidden space-y-6 p-6">
+                    <!-- Card 1 -->
+                    <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
+                            <p class="text-stone-800 text-sm">Let AI write your essay while you skim it.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-900 text-sm uppercase mb-1">Psych Problem</h4>
+                            <p class="text-stone-600 text-sm"><span class="font-semibold text-rose-700">No encoding or deep processing.</span> You never engage with the ideas.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-academic-sage text-sm uppercase mb-1">Better Way</h4>
+                            <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Write your own draft first</span>, then ask AI to suggest improvements.</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-stone-500 italic">Deep processing, feedback</span>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
+                         <div class="mb-3">
+                            <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
+                            <p class="text-stone-800 text-sm">Get full solutions without attempting them.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-900 text-sm uppercase mb-1">Psych Problem</h4>
+                            <p class="text-stone-600 text-sm"><span class="font-semibold text-rose-700">No retrieval practice.</span> You skip the struggle.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-academic-sage text-sm uppercase mb-1">Better Way</h4>
+                            <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Try the problem first</span>, then ask AI to explain errors.</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-stone-500 italic">Retrieval practice</span>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
+                            <p class="text-stone-800 text-sm">Read AI summaries the night before.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-900 text-sm uppercase mb-1">Psych Problem</h4>
+                            <p class="text-stone-600 text-sm"><span class="font-semibold text-rose-700">No spacing or testing.</span> Just familiarity.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-academic-sage text-sm uppercase mb-1">Better Way</h4>
+                            <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Ask AI to create practice questions</span> used over days.</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-stone-500 italic">Spacing, testing effect</span>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
+                            <p class="text-stone-800 text-sm">Accept AI explanations passively.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-stone-900 text-sm uppercase mb-1">Psych Problem</h4>
+                            <p class="text-stone-600 text-sm"><span class="font-semibold text-rose-700">Passive consumption.</span> Illusion of understanding.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="font-bold text-academic-sage text-sm uppercase mb-1">Better Way</h4>
+                            <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Ask AI to quiz you</span>, then explain concepts back.</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-stone-500 italic">Elaboration, metacognition</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CHECKLIST -->
+    <section id="checklist" class="py-20 bg-stone-50 border-t border-stone-200">
+        <div class="max-w-2xl mx-auto px-6">
+            
+            <div class="bg-white border border-stone-200 rounded-lg shadow-sm p-8 md:p-10" data-aos="zoom-in" data-aos-duration="600">
+                <div class="flex items-center gap-4 mb-8 pb-6 border-b border-stone-100">
+                    <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 text-xl">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-2xl font-bold text-stone-900">The 30-Second Self-Check</h2>
+                        <p class="text-xs text-stone-500 uppercase tracking-wider font-semibold mt-1">Check these off before you submit</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Item 1 -->
+                    <!-- Changed to items-center for center alignment, removed mt -->
+                    <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
+                        <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
+                            <i class="fa-regular fa-circle text-xl"></i>
+                            <i class="fa-solid fa-circle-check text-xl text-emerald-500 hidden" style="display:none"></i>
+                        </div>
+                        <div class="check-text text-stone-800 font-medium select-none text-sm leading-relaxed">
+                            Did I try to recall or solve this myself <strong>before</strong> asking AI?
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
+                        <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
+                            <i class="fa-regular fa-circle text-xl"></i>
+                            <i class="fa-solid fa-circle-check text-xl text-emerald-500 hidden" style="display:none"></i>
+                        </div>
+                        <div class="check-text text-stone-800 font-medium select-none text-sm leading-relaxed">
+                            Did I use AI to <strong>quiz me</strong>, rather than just explain things to me?
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
+                        <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
+                            <i class="fa-regular fa-circle text-xl"></i>
+                            <i class="fa-solid fa-circle-check text-xl text-emerald-500 hidden" style="display:none"></i>
+                        </div>
+                        <div class="check-text text-stone-800 font-medium select-none text-sm leading-relaxed">
+                            Did I explain the concept back in my own words without looking?
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
+                        <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
+                            <i class="fa-regular fa-circle text-xl"></i>
+                            <i class="fa-solid fa-circle-check text-xl text-emerald-500 hidden" style="display:none"></i>
+                        </div>
+                        <div class="check-text text-stone-800 font-medium select-none text-sm leading-relaxed">
+                            Did I spread my AI-assisted studying over multiple days?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="sources" class="bg-paper py-16 border-t border-stone-200">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="font-serif text-lg font-bold text-stone-800 mb-6">Psych Behind This PSA</h3>
+            <p class="text-stone-800 text-sm mb-8 leading-relaxed max-w-2xl mx-auto">
+                This PSA is based on psychological content taught in <strong>PSYCH 202: Introduction to Psychology</strong> at the University of Wisconsin–Madison. The material comes specifically from:
+            </p>
+            
+            <ul class="text-sm text-stone-600 space-y-4 inline-block text-left mb-12 max-w-3xl">
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-book text-academic-blue text-xs mt-1"></i> 
+                    <span><strong>Module 6: Memory</strong> — Encoding, storage, retrieval, sensory memory, short-term and long-term memory, implicit and explicit memory, forgetting mechanisms, misinformation, false memories, and evidence-based memory improvement strategies.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-book text-academic-blue text-xs mt-1"></i> 
+                    <span><strong>Module 7: Learning</strong> — Classical conditioning, operant conditioning, observational learning, mindset and motivation, metacognition as a learned behavior, distributed practice, and effective study habits.</span>
+                </li>
+            </ul>
+
+            <div class="text-xs text-stone-500 pt-8 border-t border-stone-200 flex flex-col gap-2">
+                <span>&copy; 2025 PSYCH 202 Student Project – Created by Roman Kus.</span>
+                <span class="opacity-75">Made with <i class="fa-solid fa-heart text-academic-rose mx-1"></i> for better learning.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({
+            once: true,
+            easing: 'ease-out-cubic',
+            offset: 50
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('nav-scrolled');
+                navbar.classList.remove('py-4', 'bg-paper/90');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('nav-scrolled', 'py-2');
+                navbar.classList.add('py-4', 'bg-paper/90');
+            }
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth Scroll Handler
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    e.preventDefault(); // Stop instant jump
+                    
+                    // Get navbar height dynamically
+                    const navHeight = document.getElementById('navbar').offsetHeight;
+                    
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Checklist Logic
+        function toggleCheck(element) {
+            element.classList.toggle('completed');
+            
+            const circle = element.querySelector('.fa-circle');
+            const check = element.querySelector('.fa-circle-check');
+            
+            if(element.classList.contains('completed')) {
+                circle.style.display = 'none';
+                check.style.display = 'inline-block';
+            } else {
+                circle.style.display = 'inline-block';
+                check.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
