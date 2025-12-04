@@ -80,9 +80,10 @@
         .checklist-item {
             transition: all 0.2s ease-out;
         }
+        /* Fix: Added !important to ensure highlight appears immediately on tap/click without moving cursor */
         .checklist-item.completed {
-            background-color: #f0fdf4;
-            border-color: #86efac;
+            background-color: #f0fdf4 !important;
+            border-color: #86efac !important;
         }
         .checklist-item.completed .check-text {
             text-decoration: line-through;
