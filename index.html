@@ -65,12 +65,9 @@
             border-radius: 99px;
             border: 2px solid #fdfdfc; 
         }
-        
-        /* Global Scroll Settings */
         html {
             scrollbar-width: thin;
             scrollbar-color: #d6d3d1 transparent;
-            scroll-padding-top: 6rem; /* Fallback for no-js */
         }
 
         /* Base styles */
@@ -83,10 +80,9 @@
         .checklist-item {
             transition: all 0.2s ease-out;
         }
-        /* Fix: Added !important to force override of hover states */
         .checklist-item.completed {
-            background-color: #f0fdf4 !important;
-            border-color: #86efac !important;
+            background-color: #f0fdf4;
+            border-color: #86efac;
         }
         .checklist-item.completed .check-text {
             text-decoration: line-through;
@@ -289,7 +285,8 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="max-w-2xl mb-12 mx-auto md:mx-0" data-aos="fade-up" data-aos-duration="600">
                 <span class="text-academic-rose font-bold uppercase tracking-widest text-xs block mb-2">The Trap</span>
-                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4 pb-2 border-b-2 border-academic-rose inline-block">
+                <!-- Removed underline border classes -->
+                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4">
                     How Misusing AI Hurts Learning
                 </h2>
                 <p class="text-stone-800 text-lg mt-2 max-w-xl">Most students use AI in ways that feel productive but actually sabotage the biological learning process.</p>
