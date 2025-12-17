@@ -39,12 +39,12 @@
                             800: '#292524',
                             900: '#1c1917',
                         },
-                        paper: '#fdfdfc', // Cleaner off-white
+                        paper: '#fdfdfc',
                         academic: {
-                            blue: '#2563eb', // Royal Blue
-                            sage: '#059669', // Emerald
-                            rose: '#e11d48', // Rose/Red
-                            green: '#15803d', // Darker Green for text readability
+                            blue: '#2563eb',
+                            sage: '#059669',
+                            rose: '#e11d48',
+                            green: '#15803d',
                         }
                     }
                 }
@@ -54,42 +54,23 @@
 
     <style>
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
             background-color: #d6d3d1;
             border-radius: 99px;
-            border: 2px solid #fdfdfc; 
+            border: 2px solid #fdfdfc;
         }
-        html {
-            scrollbar-width: thin;
-            scrollbar-color: #d6d3d1 transparent;
-        }
+        html { scrollbar-width: thin; scrollbar-color: #d6d3d1 transparent; }
 
         /* Base styles */
-        body {
-            background-color: #fdfdfc;
-            color: #1c1917;
-        }
-        
+        body { background-color: #fdfdfc; color: #1c1917; }
+
         /* Checklist Animations */
-        .checklist-item {
-            transition: all 0.2s ease-out;
-        }
-        /* Fix: Added !important to ensure highlight appears immediately on tap/click without moving cursor */
-        .checklist-item.completed {
-            background-color: #f0fdf4 !important;
-            border-color: #86efac !important;
-        }
-        .checklist-item.completed .check-text {
-            text-decoration: line-through;
-            color: #9ca3af;
-        }
-        
+        .checklist-item { transition: all 0.2s ease-out; }
+        .checklist-item.completed { background-color: #f0fdf4 !important; border-color: #86efac !important; }
+        .checklist-item.completed .check-text { text-decoration: line-through; color: #9ca3af; }
+
         /* Timeline Line in Science Section */
         .timeline-line::before {
             content: '';
@@ -103,9 +84,7 @@
             display: none;
         }
         @media (min-width: 768px) {
-            .timeline-line::before {
-                display: block;
-            }
+            .timeline-line::before { display: block; }
         }
 
         /* Nav backdrop transition */
@@ -114,6 +93,43 @@
             backdrop-filter: blur(8px);
             border-bottom: 1px solid #e7e5e4;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+        }
+
+        /* Inline citations */
+        .ref-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .ref-link:hover { text-decoration: underline; }
+        sup .ref-link { font-weight: 700; }
+
+        /* Tap-to-hover support (mobile) */
+        .tap-card { -webkit-tap-highlight-color: transparent; }
+        .tap-card:focus-visible { outline: none; }
+
+        /* Match the important hover vibes on mobile tap */
+        .tap-timeline.tap-active {
+            border-color: #d6d3d1 !important;
+        }
+        .tap-danger.tap-active {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
+        }
+        .tap-blue.tap-active {
+            border-color: #2563eb !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+        }
+
+        /* Keyboard focus parity */
+        .tap-blue:focus-visible {
+            border-color: #2563eb !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+        }
+        .tap-danger:focus-visible {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
+        }
+        .tap-timeline:focus-visible {
+            border-color: #d6d3d1 !important;
         }
     </style>
 </head>
@@ -136,7 +152,7 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-stone-800 text-xl p-2 focus:outline-none z-50">
+            <button id="mobile-menu-btn" class="md:hidden text-stone-800 text-xl p-2 focus:outline-none z-50" aria-label="Open menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -163,20 +179,17 @@
                     For Students (HS & College)
                 </div>
                 
-                <!-- Unified Title Block -->
                 <h1 class="font-serif text-[#1A1A1A] mb-6 tracking-tight text-4xl lg:text-5xl font-bold leading-tight">
                     How to Use AI to Study Without Destroying Your Learning
                 </h1>
                 
-                <!-- Shortened Human Intro -->
                 <p class="font-sans text-lg text-stone-800 leading-relaxed mb-6 max-w-md">
-                    AI is useful, but it can’t do the learning for you. When used deliberately, it becomes a tool for reflection and clearer thinking.
+                    AI is useful, but it can't do the learning for you. When used deliberately, it becomes a tool for reflection and clearer thinking.
                 </p>
 
-                <!-- Research Quote -->
                 <div class="mb-8 pl-4 border-l-2 border-stone-300">
                     <p class="text-stone-600 italic font-serif text-base leading-relaxed">
-                        “Learning is a consequence of thinking.”
+                        "Learning is a consequence of thinking."
                     </p>
                     <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider font-semibold">– Daniel Willingham</p>
                 </div>
@@ -192,10 +205,8 @@
                 </div>
             </div>
 
-            <!-- Right: Improved 'On This Page' Card -->
+            <!-- Right: 'On This Page' Card -->
             <div class="hidden lg:flex flex-col justify-center items-start relative order-1 lg:order-2 pl-12" data-aos="fade-left" data-aos-duration="800">
-                
-                <!-- Mini TOC (Larger Font, Better Spacing) -->
                 <div class="w-full max-w-sm border border-stone-200 rounded-lg p-10 bg-white shadow-sm">
                     <span class="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-6 border-b border-stone-100 pb-3">On this page</span>
                     <ul class="space-y-5">
@@ -227,51 +238,61 @@
             <div class="max-w-2xl mb-16 mx-auto md:mx-0" data-aos="fade-up" data-aos-duration="600">
                 <span class="text-academic-blue font-bold uppercase tracking-widest text-xs block mb-2">The Psychology</span>
                 <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4">How Your Brain Actually Learns</h2>
-                <p class="text-stone-800 text-lg leading-relaxed">Learning requires a biological process involving three distinct stages. Skipping one means the memory fails to stick.</p>
+                <p class="text-stone-800 text-lg leading-relaxed">Learning requires a biological process involving three distinct stages. Skipping one means the memory fails to stick.<sup>
+                    <a class="ref-link" href="#ref-1">1</a>
+                </sup></p>
             </div>
 
-            <!-- Timeline Container -->
             <div class="relative timeline-line grid md:grid-cols-3 gap-8 lg:gap-12">
                 
-                <!-- Card 1: White Background -->
-                <div class="relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
+                <!-- Card 1 -->
+                <div class="tap-card tap-timeline relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" tabindex="0" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
                     <div>
                         <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 01</span>
                         <div class="w-10 h-10 rounded bg-blue-50 text-academic-blue flex items-center justify-center text-lg mb-4">
                             <i class="fa-solid fa-eye"></i>
                         </div>
                         <h3 class="font-serif text-xl font-bold text-stone-900 mb-3">Encoding</h3>
-                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">Getting info in. This requires attention. If you skim an AI answer while distracted, the information is never processed.</p>
+                        <p class="text-stone-600 mb-4 text-sm leading-relaxed">
+                            Getting info in. This requires attention. If you skim an AI answer while distracted, the information is never processed.
+                            <sup><a class="ref-link" href="#ref-1">1</a>, <a class="ref-link" href="#ref-2">2</a></sup>
+                        </p>
                     </div>
                     <div class="mt-auto pt-4 border-t border-stone-100">
                         <span class="inline-block text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded border border-blue-100 w-full text-center">Deep Processing</span>
                     </div>
                 </div>
 
-                <!-- Card 2: White Background -->
-                <div class="relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+                <!-- Card 2 -->
+                <div class="tap-card tap-timeline relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" tabindex="0" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
                     <div>
-                         <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 02</span>
+                        <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 02</span>
                         <div class="w-10 h-10 rounded bg-purple-50 text-purple-600 flex items-center justify-center text-lg mb-4">
                             <i class="fa-solid fa-network-wired"></i>
                         </div>
                         <h3 class="font-serif text-xl font-bold text-stone-900 mb-3">Storage</h3>
-                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">Maintaining info over time. To move things to long-term memory, you need to connect new info to what you already know.</p>
+                        <p class="text-stone-600 mb-4 text-sm leading-relaxed">
+                            Maintaining info over time. To move things to long-term memory, you need to connect new info to what you already know.
+                            <sup><a class="ref-link" href="#ref-1">1</a></sup>
+                        </p>
                     </div>
                     <div class="mt-auto pt-4 border-t border-stone-100">
                         <span class="inline-block text-xs font-semibold text-purple-700 bg-purple-50 px-2 py-1 rounded border border-purple-100 w-full text-center">Consolidation</span>
                     </div>
                 </div>
 
-                <!-- Card 3: White Background -->
-                <div class="relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+                <!-- Card 3 -->
+                <div class="tap-card tap-timeline relative bg-white p-8 border border-stone-200 rounded-lg shadow-sm z-10 flex flex-col justify-between hover:border-stone-300 transition-colors" tabindex="0" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
                     <div>
-                         <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 03</span>
+                        <span class="inline-block bg-stone-50 text-stone-500 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-stone-200">Stage 03</span>
                         <div class="w-10 h-10 rounded bg-emerald-50 text-academic-sage flex items-center justify-center text-lg mb-4">
                             <i class="fa-solid fa-box-open"></i>
                         </div>
                         <h3 class="font-serif text-xl font-bold text-stone-900 mb-3">Retrieval</h3>
-                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">Pulling info out. This is where learning is strengthened. Struggling to recall an answer reinforces the pathway.</p>
+                        <p class="text-stone-600 mb-4 text-sm leading-relaxed">
+                            Pulling info out. This is where learning is strengthened. Struggling to recall an answer reinforces the pathway.
+                            <sup><a class="ref-link" href="#ref-3">3</a></sup>
+                        </p>
                     </div>
                     <div class="mt-auto pt-4 border-t border-stone-100">
                         <span class="inline-block text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded border border-emerald-100 w-full text-center">Testing Effect</span>
@@ -286,42 +307,54 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="max-w-2xl mb-12 mx-auto md:mx-0" data-aos="fade-up" data-aos-duration="600">
                 <span class="text-academic-rose font-bold uppercase tracking-widest text-xs block mb-2">The Trap</span>
-                <!-- Removed underline border classes -->
-                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4">
-                    How Misusing AI Hurts Learning
-                </h2>
+                <h2 class="font-serif text-3xl font-bold text-stone-900 mb-4">How Misusing AI Hurts Learning</h2>
                 <p class="text-stone-800 text-lg mt-2 max-w-xl">Most students use AI in ways that feel productive but actually sabotage the biological learning process.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Danger Card 1 -->
-                <div class="bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" data-aos="fade-up" data-aos-duration="600">
+                <div class="tap-card tap-danger bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" tabindex="0" data-aos="fade-up" data-aos-duration="600">
                     <div class="text-academic-rose text-xl mb-4"><i class="fa-solid fa-copy"></i></div>
                     <h3 class="font-bold text-stone-900 text-lg mb-2">The Copy-Paste Trap</h3>
-                    <p class="text-stone-600 text-sm mb-6 leading-relaxed">When you copy an AI answer and submit it, you bypass Encoding entirely. Your brain treats it as noise.</p>
-                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">
-                        Result: Total Amnesia
-                    </div>
+                    <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                        When you copy an AI answer and submit it, you bypass Encoding entirely. Your brain treats it as noise.
+                        <sup><a class="ref-link" href="#ref-1">1</a>, <a class="ref-link" href="#ref-2">2</a></sup>
+                    </p>
+                    <p class="text-xs text-stone-400 leading-relaxed mb-6">
+                        Why: if you don't do meaning-based processing, the memory trace is weak.
+                        <sup><a class="ref-link" href="#ref-2">2</a></sup>
+                    </p>
+                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">Result: Total Amnesia</div>
                 </div>
 
                 <!-- Danger Card 2 -->
-                <div class="bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+                <div class="tap-card tap-danger bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" tabindex="0" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
                     <div class="text-academic-rose text-xl mb-4"><i class="fa-solid fa-eye"></i></div>
                     <h3 class="font-bold text-stone-900 text-lg mb-2">The "I Read It" Fallacy</h3>
-                    <p class="text-stone-600 text-sm mb-6 leading-relaxed">Reading a perfect AI explanation creates the Illusion of Competence. Recognition is not recall.</p>
-                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">
-                        Result: Exam Failure
-                    </div>
+                    <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                        Reading a perfect AI explanation creates the Illusion of Competence. Recognition is not recall.
+                        <sup><a class="ref-link" href="#ref-7">7</a></sup>
+                    </p>
+                    <p class="text-xs text-stone-400 leading-relaxed mb-6">
+                        Research summary: rereading feels productive, but self-testing produces stronger learning.
+                        <sup><a class="ref-link" href="#ref-3">3</a>, <a class="ref-link" href="#ref-7">7</a></sup>
+                    </p>
+                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">Result: Exam Failure</div>
                 </div>
 
                 <!-- Danger Card 3 -->
-                <div class="bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+                <div class="tap-card tap-danger bg-white p-8 rounded-lg border-l-4 border-l-academic-rose border border-stone-200 shadow-sm hover:shadow-md transition-all" tabindex="0" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
                     <div class="text-academic-rose text-xl mb-4"><i class="fa-solid fa-bolt"></i></div>
                     <h3 class="font-bold text-stone-900 text-lg mb-2">The Cramming Enabler</h3>
-                    <p class="text-stone-600 text-sm mb-6 leading-relaxed">Summarizing weeks of work into one page creates shallow memories that fade within hours.</p>
-                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">
-                        Result: Poor Retention
-                    </div>
+                    <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                        Summarizing weeks of work into one page creates shallow memories that fade within hours.
+                        <sup><a class="ref-link" href="#ref-4">4</a>, <a class="ref-link" href="#ref-5">5</a></sup>
+                    </p>
+                    <p class="text-xs text-stone-400 leading-relaxed mb-6">
+                        Research summary: spaced/distributed practice beats massed practice for long-term retention.
+                        <sup><a class="ref-link" href="#ref-4">4</a>, <a class="ref-link" href="#ref-5">5</a></sup>
+                    </p>
+                    <div class="text-xs font-bold text-rose-800 bg-rose-50 px-2 py-1 inline-block rounded border border-rose-100">Result: Poor Retention</div>
                 </div>
             </div>
         </div>
@@ -340,36 +373,44 @@
                     
                     <div class="mb-8 pl-4 border-l-2 border-stone-300">
                         <p class="text-stone-600 italic font-serif text-sm leading-relaxed">
-                            “Every time you retrieve a memory, you strengthen its neural representation.”
+                            "Every time you retrieve a memory, you strengthen its neural representation."
                         </p>
                         <p class="text-xs text-stone-400 mt-1 uppercase tracking-wider font-semibold">– Henry L. Roediger III</p>
                     </div>
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-5">
-                    <!-- Strat 1: White Background -->
-                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-duration="600">
+                    <!-- Strat 1 -->
+                    <div class="tap-card tap-blue p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-pointer group" tabindex="0" data-aos="fade-up" data-aos-duration="600">
                         <div class="text-academic-blue text-lg mb-3"><i class="fa-solid fa-brain"></i></div>
                         <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Retrieval Practice</h4>
-                        <p class="text-sm text-stone-600 leading-relaxed">Testing yourself works better than re-reading. Active recall builds muscle memory for your brain.</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">Testing yourself works better than re-reading. Active recall builds memory pathways.
+                            <sup><a class="ref-link" href="#ref-3">3</a>, <a class="ref-link" href="#ref-7">7</a></sup>
+                        </p>
                     </div>
-                    <!-- Strat 2: White Background -->
-                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-delay="50" data-aos-duration="600">
+                    <!-- Strat 2 -->
+                    <div class="tap-card tap-blue p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-pointer group" tabindex="0" data-aos="fade-up" data-aos-delay="50" data-aos-duration="600">
                         <div class="text-academic-blue text-lg mb-3"><i class="fa-solid fa-layer-group"></i></div>
                         <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Deep Processing</h4>
-                        <p class="text-sm text-stone-600 leading-relaxed">Don't just read words. Ask "Why?" and "How does this connect?" Elaboration builds memory.</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">Don't just read words. Ask "Why?" and connect ideas—elaboration builds memory.
+                            <sup><a class="ref-link" href="#ref-2">2</a></sup>
+                        </p>
                     </div>
-                    <!-- Strat 3: White Background -->
-                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+                    <!-- Strat 3 -->
+                    <div class="tap-card tap-blue p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-pointer group" tabindex="0" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
                         <div class="text-academic-blue text-lg mb-3"><i class="fa-regular fa-clock"></i></div>
                         <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Spaced Repetition</h4>
-                        <p class="text-sm text-stone-600 leading-relaxed">Studying 30 mins over 4 days beats 2 hours once. Sleep consolidates memory. Give your brain breaks.</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">Spacing your practice over time beats cramming. Sleep + gaps help consolidation.
+                            <sup><a class="ref-link" href="#ref-4">4</a>, <a class="ref-link" href="#ref-5">5</a></sup>
+                        </p>
                     </div>
-                    <!-- Strat 4: White Background -->
-                    <div class="p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-default group" data-aos="fade-up" data-aos-delay="150" data-aos-duration="600">
+                    <!-- Strat 4 -->
+                    <div class="tap-card tap-blue p-6 rounded border border-stone-200 bg-white hover:border-academic-blue hover:shadow-sm transition-all cursor-pointer group" tabindex="0" data-aos="fade-up" data-aos-delay="150" data-aos-duration="600">
                         <div class="text-academic-blue text-lg mb-3"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
                         <h4 class="font-bold text-stone-900 mb-2 font-serif text-lg">Metacognition</h4>
-                        <p class="text-sm text-stone-600 leading-relaxed">Think about your thinking. Be honest: "Do I actually know this, or does it just look familiar?"</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">Think about your thinking. Check if you can explain it without looking.
+                            <sup><a class="ref-link" href="#ref-6">6</a></sup>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -385,12 +426,10 @@
                 <p class="text-stone-800 text-lg">A comparison of common pitfalls versus strategies that align with learning science.</p>
             </div>
 
-            <!-- Responsive Table Container -->
             <div class="overflow-x-auto rounded-lg border border-stone-200 shadow-sm bg-white mx-auto max-w-6xl" data-aos="fade-up" data-aos-duration="600">
                 <table class="w-full text-left border-collapse hidden md:table table-fixed">
                     <thead>
                         <tr class="bg-stone-50 border-b border-stone-200">
-                            <!-- Fixed: Headers aligned top/left -->
                             <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">How Students Often Use AI</th>
                             <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">Psychological Problem</th>
                             <th class="p-8 font-serif font-bold text-stone-800 w-1/4 align-top text-left">Better Way to Use AI</th>
@@ -398,72 +437,35 @@
                         </tr>
                     </thead>
                     <tbody class="text-sm">
-                        <!-- Row 1 -->
                         <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                Let AI write your essay while you skim it.
-                            </td>
-                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-rose-700">No encoding or deep processing.</span> You never engage with the ideas.
-                            </td>
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-academic-green">Write your own draft first</span>, then ask AI to suggest improvements or counterarguments.
-                            </td>
-                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
-                                Deep processing, feedback, metacognition
-                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">Let AI write your essay while you skim it.</td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left"><span class="font-semibold text-rose-700">No encoding or deep processing.</span> You never engage with the ideas.</td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left"><span class="font-semibold text-academic-green">Write your own draft first</span>, then ask AI to suggest improvements or counterarguments.</td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">Deep processing, feedback, metacognition <sup><a class="ref-link" href="#ref-2">2</a>, <a class="ref-link" href="#ref-6">6</a></sup></td>
                         </tr>
-                        <!-- Row 2 -->
                         <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                Get full problem solutions without attempting them.
-                            </td>
-                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-rose-700">No retrieval practice.</span> You skip the struggle that builds memory.
-                            </td>
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-academic-green">Try the problem first</span>, then ask AI to explain where your reasoning went wrong.
-                            </td>
-                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
-                                Retrieval practice, error correction
-                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">Get full problem solutions without attempting them.</td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left"><span class="font-semibold text-rose-700">No retrieval practice.</span> You skip the struggle that builds memory.</td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left"><span class="font-semibold text-academic-green">Try the problem first</span>, then ask AI to explain where your reasoning went wrong.</td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">Retrieval practice, error correction <sup><a class="ref-link" href="#ref-3">3</a></sup></td>
                         </tr>
-                        <!-- Row 3 -->
                         <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                Read AI summaries once the night before the exam.
-                            </td>
-                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-rose-700">No spacing or testing.</span> You only get fleeting familiarity.
-                            </td>
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-academic-green">Ask AI to create practice questions</span> you use over several days.
-                            </td>
-                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
-                                Spacing, testing effect
-                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">Read AI summaries once the night before the exam.</td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left"><span class="font-semibold text-rose-700">No spacing or testing.</span> You only get fleeting familiarity.</td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left"><span class="font-semibold text-academic-green">Ask AI to create practice questions</span> you use over several days.</td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">Spacing, testing effect <sup><a class="ref-link" href="#ref-3">3</a>, <a class="ref-link" href="#ref-4">4</a>, <a class="ref-link" href="#ref-5">5</a></sup></td>
                         </tr>
-                        <!-- Row 4 -->
                         <tr class="hover:bg-stone-50 transition-colors">
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                Accept AI explanations without questioning them.
-                            </td>
-                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-rose-700">Passive consumption</span> creates an illusion of understanding.
-                            </td>
-                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">
-                                <span class="font-semibold text-academic-green">Ask AI to quiz you</span>, then explain concepts back in your own words.
-                            </td>
-                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">
-                                Elaboration, metacognition
-                            </td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left">Accept AI explanations without questioning them.</td>
+                            <td class="p-8 text-stone-600 align-top leading-relaxed text-left"><span class="font-semibold text-rose-700">Passive consumption</span> creates an illusion of understanding.</td>
+                            <td class="p-8 text-stone-800 align-top leading-relaxed text-left"><span class="font-semibold text-academic-green">Ask AI to quiz you</span>, then explain concepts back in your own words.</td>
+                            <td class="p-8 text-stone-500 italic align-top leading-relaxed text-left">Elaboration, metacognition <sup><a class="ref-link" href="#ref-6">6</a>, <a class="ref-link" href="#ref-7">7</a></sup></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- Mobile Card View (shown only on small screens) -->
+                <!-- Mobile Card View -->
                 <div class="md:hidden space-y-6 p-6">
-                    <!-- Card 1 -->
                     <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
                         <div class="mb-3">
                             <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
@@ -478,12 +480,12 @@
                             <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Write your own draft first</span>, then ask AI to suggest improvements.</p>
                         </div>
                         <div>
-                            <span class="text-xs text-stone-500 italic">Deep processing, feedback</span>
+                            <span class="text-xs text-stone-500 italic">Deep processing, feedback <sup><a class="ref-link" href="#ref-2">2</a></sup></span>
                         </div>
                     </div>
-                    <!-- Card 2 -->
+
                     <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
                             <p class="text-stone-800 text-sm">Get full solutions without attempting them.</p>
                         </div>
@@ -496,10 +498,10 @@
                             <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Try the problem first</span>, then ask AI to explain errors.</p>
                         </div>
                         <div>
-                            <span class="text-xs text-stone-500 italic">Retrieval practice</span>
+                            <span class="text-xs text-stone-500 italic">Retrieval practice <sup><a class="ref-link" href="#ref-3">3</a></sup></span>
                         </div>
                     </div>
-                    <!-- Card 3 -->
+
                     <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
                         <div class="mb-3">
                             <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
@@ -514,10 +516,10 @@
                             <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Ask AI to create practice questions</span> used over days.</p>
                         </div>
                         <div>
-                            <span class="text-xs text-stone-500 italic">Spacing, testing effect</span>
+                            <span class="text-xs text-stone-500 italic">Spacing, testing effect <sup><a class="ref-link" href="#ref-3">3</a>, <a class="ref-link" href="#ref-4">4</a></sup></span>
                         </div>
                     </div>
-                    <!-- Card 4 -->
+
                     <div class="border border-stone-200 rounded p-5 bg-stone-50/50">
                         <div class="mb-3">
                             <h4 class="font-bold text-stone-800 text-sm uppercase mb-1">Common Pitfall</h4>
@@ -532,7 +534,7 @@
                             <p class="text-stone-800 font-medium text-sm"><span class="font-semibold text-academic-green">Ask AI to quiz you</span>, then explain concepts back.</p>
                         </div>
                         <div>
-                            <span class="text-xs text-stone-500 italic">Elaboration, metacognition</span>
+                            <span class="text-xs text-stone-500 italic">Elaboration, metacognition <sup><a class="ref-link" href="#ref-6">6</a></sup></span>
                         </div>
                     </div>
                 </div>
@@ -543,7 +545,6 @@
     <!-- SECTION 5: CHECKLIST -->
     <section id="checklist" class="py-20 bg-stone-50 border-t border-stone-200">
         <div class="max-w-2xl mx-auto px-6">
-            
             <div class="bg-white border border-stone-200 rounded-lg shadow-sm p-8 md:p-10" data-aos="zoom-in" data-aos-duration="600">
                 <div class="flex items-center gap-4 mb-8 pb-6 border-b border-stone-100">
                     <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 text-xl">
@@ -556,8 +557,6 @@
                 </div>
 
                 <div class="space-y-4">
-                    <!-- Item 1 -->
-                    <!-- Changed to items-center for center alignment, removed mt -->
                     <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
                         <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
                             <i class="fa-regular fa-circle text-xl"></i>
@@ -568,7 +567,6 @@
                         </div>
                     </div>
 
-                    <!-- Item 2 -->
                     <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
                         <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
                             <i class="fa-regular fa-circle text-xl"></i>
@@ -579,7 +577,6 @@
                         </div>
                     </div>
 
-                    <!-- Item 3 -->
                     <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
                         <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
                             <i class="fa-regular fa-circle text-xl"></i>
@@ -590,7 +587,6 @@
                         </div>
                     </div>
 
-                    <!-- Item 4 -->
                     <div class="checklist-item cursor-pointer p-4 rounded border border-stone-100 hover:bg-stone-50 flex items-center gap-4 group bg-stone-50/30" onclick="toggleCheck(this)">
                         <div class="flex-shrink-0 text-stone-300 group-hover:text-stone-400 transition-colors">
                             <i class="fa-regular fa-circle text-xl"></i>
@@ -613,18 +609,36 @@
                 This PSA is based on psychological content taught in <strong>PSYCH 202: Introduction to Psychology</strong> at the University of Wisconsin–Madison. The material comes specifically from:
             </p>
             
-            <ul class="text-sm text-stone-600 space-y-4 inline-block text-left mb-12 max-w-3xl">
+            <ul class="text-sm text-stone-600 space-y-4 inline-block text-left mb-10 max-w-3xl">
                 <li class="flex items-start gap-3">
                     <i class="fa-solid fa-book text-academic-blue text-xs mt-1"></i> 
-                    <span><strong>Module 6: Memory</strong> — Encoding, storage, retrieval, sensory memory, short-term and long-term memory, implicit and explicit memory, forgetting mechanisms, misinformation, false memories, and evidence-based memory improvement strategies.</span>
+                    <span><strong>Module 6: Memory</strong> — Encoding, storage, retrieval, forgetting mechanisms, and evidence-based memory improvement strategies.</span>
                 </li>
                 <li class="flex items-start gap-3">
                     <i class="fa-solid fa-book text-academic-blue text-xs mt-1"></i> 
-                    <span><strong>Module 7: Learning</strong> — Classical conditioning, operant conditioning, observational learning, mindset and motivation, metacognition as a learned behavior, distributed practice, and effective study habits.</span>
+                    <span><strong>Module 7: Learning</strong> — Classical conditioning, operant conditioning, observational learning, metacognition, distributed practice, and effective study habits.</span>
                 </li>
             </ul>
 
-            <div class="text-xs text-stone-500 pt-8 border-t border-stone-200 flex flex-col gap-2">
+            <!-- Key references (rubric: "specific research") -->
+            <div class="text-left max-w-3xl mx-auto bg-white border border-stone-200 rounded-lg p-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fa-solid fa-quote-left text-stone-400"></i>
+                    <h4 class="font-serif font-bold text-stone-900">Key Research Cited in This PSA</h4>
+                </div>
+                <p class="text-xs text-stone-500 mb-4">Numbers match the inline citations throughout the page.</p>
+                <ol class="text-xs text-stone-600 space-y-3 list-decimal pl-5">
+                    <li id="ref-1">McDermott, K. B., &amp; Roediger, H. L. (2021). Memory (encoding, storage, retrieval). In R. Biswas-Diener &amp; E. Diener (Eds.), <em>Noba textbook series: Psychology</em>. Champaign, IL: DEF Publishers. Retrieved from <a href="http://noba.to/bdc4uger" class="ref-link">http://noba.to/bdc4uger</a></li>
+                    <li id="ref-2">Craik, F. I. M., &amp; Lockhart, R. S. (1972). Levels of processing: A framework for memory research. <em>Journal of Verbal Learning and Verbal Behavior, 11</em>, 671–684.</li>
+                    <li id="ref-3">Karpicke, J. D., &amp; Roediger, H. L., III (2007). Repeated retrieval during learning is the key to long-term retention. <em>Journal of Memory and Language, 57</em>, 151–162.</li>
+                    <li id="ref-4">Carpenter, S. K., Cepeda, N. J., Rohrer, D., Kang, S. H. K., &amp; Pashler, H. (2012). Using spacing to enhance diverse forms of learning: Review of recent research and implications for instruction. <em>Educational Psychology Review, 24</em>, 369–378.</li>
+                    <li id="ref-5">Francisco, A. (2019). Ask the cognitive scientist: Distributed practice (Interview with Dr. Sean Kang). <em>Digital Promise</em>. Retrieved from <a href="https://digitalpromise.org/2019/05/08/ask-the-cognitive-scientist-distributed-practice/" class="ref-link">https://digitalpromise.org</a></li>
+                    <li id="ref-6">Boser, U. (2018). Learning is a learned behavior: Here's how to get better at it. <em>Harvard Business Review</em>. Retrieved from <a href="https://hbr.org/2018/05/learning-is-a-learned-behavior-heres-how-to-get-better-at-it" class="ref-link">https://hbr.org</a></li>
+                    <li id="ref-7">Wade, C., Tavris, C., &amp; Garry, M. (2014). The nine secrets of learning. In <em>Psychology</em> (11th ed.). Upper Saddle River, NJ: Pearson Education.</li>
+                </ol>
+            </div>
+
+            <div class="text-xs text-stone-500 pt-8 mt-10 border-t border-stone-200 flex flex-col gap-2">
                 <span>&copy; 2025 PSYCH 202 Student Project – Created by Roman Kus.</span>
                 <span class="opacity-75">Made with <i class="fa-solid fa-heart text-academic-rose mx-1"></i> for better learning.</span>
             </div>
@@ -635,11 +649,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Init AOS
-        AOS.init({
-            once: true,
-            easing: 'ease-out-cubic',
-            offset: 50
-        });
+        AOS.init({ once: true, easing: 'ease-out-cubic', offset: 50 });
 
         // Navbar Scroll Effect
         const navbar = document.getElementById('navbar');
@@ -675,20 +685,12 @@
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
                 const targetElement = document.querySelector(targetId);
-                
                 if (targetElement) {
-                    e.preventDefault(); // Stop instant jump
-                    
-                    // Get navbar height dynamically
+                    e.preventDefault();
                     const navHeight = document.getElementById('navbar').offsetHeight;
-                    
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
             });
         });
@@ -696,11 +698,9 @@
         // Checklist Logic
         function toggleCheck(element) {
             element.classList.toggle('completed');
-            
             const circle = element.querySelector('.fa-circle');
             const check = element.querySelector('.fa-circle-check');
-            
-            if(element.classList.contains('completed')) {
+            if (element.classList.contains('completed')) {
                 circle.style.display = 'none';
                 check.style.display = 'inline-block';
             } else {
@@ -708,6 +708,50 @@
                 check.style.display = 'none';
             }
         }
+
+        // Tap-to-hover support (mobile) + keyboard parity
+        (function () {
+            const cards = document.querySelectorAll('.tap-card');
+            let active = null;
+
+            const setActive = (el) => {
+                // toggle off if same card
+                if (active === el && el.classList.contains('tap-active')) {
+                    el.classList.remove('tap-active');
+                    active = null;
+                    return;
+                }
+                if (active && active !== el) active.classList.remove('tap-active');
+                el.classList.add('tap-active');
+                active = el;
+            };
+
+            cards.forEach((el) => {
+                // already has tabindex in markup, but keep safe
+                if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+
+                // Touch + click
+                el.addEventListener('touchstart', () => setActive(el), { passive: true });
+                el.addEventListener('click', () => setActive(el));
+
+                // Keyboard
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setActive(el);
+                    }
+                });
+            });
+
+            // Tap/click outside clears active state
+            document.addEventListener('click', (e) => {
+                if (!active) return;
+                if (!e.target.closest('.tap-card')) {
+                    active.classList.remove('tap-active');
+                    active = null;
+                }
+            });
+        })();
     </script>
 </body>
 </html>
